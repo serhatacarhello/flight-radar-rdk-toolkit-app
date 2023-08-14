@@ -16,27 +16,27 @@ import Info from "../components/info";
 import { useCallback } from "react";
 import { useRef } from "react";
 import { useState } from "react";
+import LocationMarker from "../components/location-marker";
 
 export default function MapView() {
   const { flights, isLoading } = useSelector((store) => store.flight);
   const center = [39.1505, 34.8];
   const animateRef = useRef(false);
-  const [position, setPosition] = useState(center);
   const [id, setId] = useState(null);
 
-  // LocationMarker component
-  function LocationMarker() {
-    const map = useMapEvent("locationfound", (e) => {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    });
+  // // LocationMarker component
+  // function LocationMarker() {
+  //   const map = useMapEvent("locationfound", (e) => {
+  //     setPosition(e.latlng);
+  //     map.flyTo(e.latlng, map.getZoom());
+  //   });
 
-    return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
-    );
-  }
+  //   return position === null ? null : (
+  //     <Marker icon={markerIcon} position={position}>
+  //       <Popup>You are here</Popup>
+  //     </Marker>
+  //   );
+  // }
 
   // SetViewOnClick component
   function SetViewOnClick({ animateRef }) {
@@ -104,7 +104,7 @@ export default function MapView() {
         ))}
 
         <SideDetail isOpen={isOpen} flyId={id} onClose={onClose} />
-        <LocationMarker />
+        <LocationMarker center={center} />
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
     </Box>

@@ -20,3 +20,10 @@ export const markerIcon = new L.Icon({
   iconAnchor: [20, 40],
   popupAnchor: [0, -40],
 });
+export const markerLocation = new L.Icon({
+  // iconUrl: "/marker.png",
+  iconUrl: "/locationMarker.png",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -40],
+});

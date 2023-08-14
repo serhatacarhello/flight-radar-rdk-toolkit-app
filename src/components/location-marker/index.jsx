@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
+import { markerLocation } from "../../utils/marker";
 
-export default function LocationMarker() {
+export default function LocationMarker({ center }) {
   const [position, setPosition] = useState(null);
   const map = useMapEvents({
     click() {
@@ -14,9 +15,8 @@ export default function LocationMarker() {
   });
 
   return position === null ? null : (
-    <Marker position={position}>
+    <Marker position={position} icon={markerLocation}>
       <Popup>You are here</Popup>
     </Marker>
   );
 }
-
