@@ -29,23 +29,26 @@ import { arrivalIcon, departureIcon } from "../../utils/marker";
 import ImgFallback from "../img-fallback";
 import { TbPlaneArrival } from "react-icons/tb";
 import { TbPlaneDeparture } from "react-icons/tb";
+import { Suspense } from "react";
 
 export default function SideDetail({ isOpen, flyId, onClose }) {
   const [detail, setDetail] = useState(null);
   const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
+    if (!flyId) {
+      return;
+    }
+
     (async () => {
-      //?  const response = await api.get(`flights/detail?flight=${fly.id}`)
-      setDetail(null);
-      setShowMap(false);
-      const response = await api.get(`flights/detail`, {
-        params: { flight: flyId },
-      });
-      // console.log(response.data);
-      setDetail(response.data);
-      // console.log("useEffect detail");
-      // console.log("flyId", flyId);
+      try {
+        const response = await api.get(`flights/detail`, {
+          params: { flight: flyId },
+        });
+        setDetail(response.data);
+      } catch (error) {
+        console.error("Error fetching flight detail:", error);
+      }
     })();
   }, [flyId]);
 
@@ -105,32 +108,36 @@ export default function SideDetail({ isOpen, flyId, onClose }) {
                     {!detail.aircraft.images ? (
                       <Loading />
                     ) : (
-                      <Splide
-                        aria-label="Aircraft Images"
-                        options={{
-                          rewind: true,
-                          perPage: 1,
-                          width: 800,
-                          // type: "loop",
-                          // perPage: 3,
-                          // autoplay: true,
-                          pagination: false,
-                        }}
-                      >
-                        {detail?.aircraft?.images?.large?.map((img, index) => (
-                          <SplideSlide key={index}>
-                            <ImgFallback
-                              src={img.src}
-                              style={{
-                                borderRadius: "5px",
-                                width: "100%",
-                                height: "auto",
-                              }}
-                              alt={img.source}
-                            />
-                          </SplideSlide>
-                        ))}
-                      </Splide>
+                      <Suspense fallback={<Loading />}>
+                        <Splide
+                          aria-label="Aircraft Images"
+                          options={{
+                            rewind: true,
+                            perPage: 1,
+                            width: 800,
+                            // type: "loop",
+                            // perPage: 3,
+                            // autoplay: true,
+                            pagination: false,
+                          }}
+                        >
+                          {detail?.aircraft?.images?.large?.map(
+                            (img, index) => (
+                              <SplideSlide key={index}>
+                                <ImgFallback
+                                  src={img.src}
+                                  style={{
+                                    borderRadius: "5px",
+                                    width: "100%",
+                                    height: "auto",
+                                  }}
+                                  alt={img.source}
+                                />
+                              </SplideSlide>
+                            )
+                          )}
+                        </Splide>
+                      </Suspense>
                     )}
                   </Center>
 
@@ -191,10 +198,11 @@ export default function SideDetail({ isOpen, flyId, onClose }) {
                       <Text pt="2" fontSize="xl">
                         Status:{" "}
                         <Box
+                          className="analysis"
                           display={"inline-block"}
                           background={detail?.status?.icon}
+                          color={"black"}
                           px={"1"}
-                          color={"white"}
                         >
                           {detail?.status?.text && ` ${detail?.status?.text}`}
                         </Box>
@@ -262,8 +270,8 @@ export default function SideDetail({ isOpen, flyId, onClose }) {
                       <Button
                         alignSelf={"end"}
                         mt={2}
-                        colorScheme="pink"
-                        variant={"solid"}
+                        colorScheme="purple"
+                        variant={colorMode === "light" ? "solid" : "outline"}
                         onClick={toggleShowMap}
                       >
                         {showMap === true ? "Close" : "Open"} Flight Map

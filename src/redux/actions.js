@@ -3,7 +3,7 @@ import { api } from "../utils/useApi";
 
 // clear LocalStorage
 function clearLocalStorage() {
-  localStorage.clear();
+  localStorage.removeItem("flights");
   // console.log("localStorage cleared");
 }
 

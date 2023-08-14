@@ -32,4 +32,6 @@ npm install
 npm start
 ```
 
-#Add your api key from flight radar api[flightRadar](https://rapidapi.com/collection/flightradar24-api)
+#Add your api key from flight radar api [flightRadar](https://rapidapi.com/collection/flightradar24-api)
+
+#![app-gif](src/assets/flight-radar-app.gif)

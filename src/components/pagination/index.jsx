@@ -8,7 +8,7 @@ export default function Pagination({ itemsPerPage, totalItems, onPageChange }) {
   const [currentPage, setCurrentPage] = useState(0);
 
   const handlePageClick = (selected) => {
-    console.log("selected in handlepageclick", selected);
+    // console.log("selected in handlepageclick", selected);
     setCurrentPage(selected.selected);
     //calls props onPageChange
     onPageChange(selected.selected);

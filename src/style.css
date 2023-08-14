@@ -15,14 +15,34 @@ body {
 }
 
 .pagination .active a {
-  background-color: cyan;
+  background-color: rgba(0, 255, 255, 0.295);
   padding: 4px 15px;
   border-radius: 5px;
 }
 
 .pagination a:hover {
   transition: all 0.3s;
-  background-color: green;
+  background-color: rgb(18, 179, 243);
   padding: 4px 15px;
   border-radius: 5px;
+}
+
+.analysis {
+  color: white;
+  padding: 1px;
+  border-radius: 5px;
+  transition: color 0.3s ease;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.analysis::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  filter: invert(100%);
+  box-shadow: 0 0 2px;
 }

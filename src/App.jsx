@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MapView from "./pages/MapView";
 import ListView from "./pages/ListView";
 
-import Header from "./components/header";
 import Home from "./pages/Home";
 import Flights from "./pages/Flights";
+import Header from "./components/header/Header";
 
 function App() {
   return (

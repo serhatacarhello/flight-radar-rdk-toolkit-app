@@ -7,20 +7,27 @@ import { useRef } from "react";
 import { useMemo } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
-import { Box, Button, HStack, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  HStack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import SideDetail from "../components/side-detail";
 import { markerIcon } from "../utils/marker";
+import Info from "../components/info";
 
 export default function MapView() {
-  const { flights } = useSelector((store) => store.flight);
+  const { flights, isLoading } = useSelector((store) => store.flight);
   // console.log("🚀 ~ file: MapView.jsx:16 ~ MapView ~ state:", flights[0]);
 
   let center = [39.1505, 34.8];
   const animateRef = useRef(false);
   const [position, setPosition] = useState(center);
   const [id, setId] = useState(null);
-  useEffect(() => {}, []);
 
   function LocationMarker() {
     const map = useMapEvents({
@@ -92,6 +99,9 @@ export default function MapView() {
   };
   return (
     <Box width={"full"} height={"full"} mt={5}>
+      <Center mb={2}>
+        <Info flights={flights} isLoading={isLoading} />
+      </Center>
       <MapContainer
         center={center}
         style={{ height: "80vh" }}

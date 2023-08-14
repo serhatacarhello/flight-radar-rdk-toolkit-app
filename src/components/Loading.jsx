@@ -1,6 +1,6 @@
 import { Box, Spinner, Text } from "@chakra-ui/react";
 
-export default function Loading() {
+export default function Loading({ children }) {
   return (
     <Box>
       <Spinner
@@ -10,7 +10,7 @@ export default function Loading() {
         emptyColor="cyan"
         size="xl"
       />
-      <Text>Loading...</Text>
+      {children}
     </Box>
   );
 }
