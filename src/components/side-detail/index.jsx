@@ -36,6 +36,7 @@ export default function SideDetail({ isOpen, flyId, onClose }) {
   const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
+    setDetail(null);
     if (!flyId) {
       return;
     }
@@ -95,7 +96,7 @@ export default function SideDetail({ isOpen, flyId, onClose }) {
             color={colorMode === "dark" ? "whiteAlpha.700" : "ButtonText"}
           >
             {!detail ? (
-              <Center w={"full"} h={"25vh"}>
+              <Center w={"full"} minH={"25vh"}>
                 <Loading />
               </Center>
             ) : (
@@ -196,12 +197,14 @@ export default function SideDetail({ isOpen, flyId, onClose }) {
                         Analysis
                       </Heading>
                       <Text pt="2" fontSize="xl">
-                        Status:{" "}
+                        Status:
                         <Box
                           className="analysis"
                           display={"inline-block"}
                           background={detail?.status?.icon}
-                          color={"black"}
+                          color={
+                            !detail?.status?.icon ? "whatsapp.500" : "black"
+                          }
                           px={"1"}
                         >
                           {detail?.status?.text && ` ${detail?.status?.text}`}
