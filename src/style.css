@@ -1,0 +1,28 @@
+body {
+  overflow-x: hidden; /* Dikey kaydırmayı gizle */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  align-items: center;
+  gap: 20px;
+  list-style-type: none;
+  font-size: large;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.pagination .active a {
+  background-color: cyan;
+  padding: 4px 15px;
+  border-radius: 5px;
+}
+
+.pagination a:hover {
+  transition: all 0.3s;
+  background-color: green;
+  padding: 4px 15px;
+  border-radius: 5px;
+}
